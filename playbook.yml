@@ -1,0 +1,8 @@
+- hosts: animes-web
+  tasks: 
+  - name: criando index.html
+    copy:
+      dest: /home/ubuntu/index.html
+      content: <h1>Testando ansible com terraform</h1>
+  - name: criando servidor web
+    shell: "nohup busybox httpd -f -d 8080 &"
