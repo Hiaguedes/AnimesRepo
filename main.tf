@@ -12,7 +12,7 @@ terraform {
 provider "aws" {
   profile = "default"
   region  = "us-east-1"
-  shared_credentials_file = "~/.aws/credentials"
+  shared_credentials_file = "/mnt/c/Users/hiago/.aws/credentials"
 }
 
 resource "aws_instance" "app_server" {
@@ -26,7 +26,7 @@ resource "aws_instance" "app_server" {
                     nohup busybox httpd -f -p 8080 &
                 EOF
   tags = {
-    Name = "Animes Instancia teste"
+    Name = "App React Animes web"
   }
 }
 

@@ -23,4 +23,11 @@ Assim que confirmamos que todas as alterações serão como planejamos, nesse ca
 
 ## Comunicacao SSH 
 
-ssh -i "iac-maquina-animes.pem" ubuntu@ec2-34-207-66-181.compute-1.amazonaws.com
+ssh -i "iac-ec2-animes.pem" ubuntu@ec2-54-161-174-251.compute-1.amazonaws.com
+
+A chave tem que estar com permissao para leitura do seu usario ou seja
+
+`chnmod 400 *.pem`
+
+ansible-playbook playbook.yml --private-key iac-ec2-animes.pem -i hosts.yml 
+-u ubuntu 

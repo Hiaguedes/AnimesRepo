@@ -1,8 +1,17 @@
 - hosts: animes-web
   tasks: 
-  - name: criando index.html
-    copy:
-      dest: /home/ubuntu/index.html
-      content: <h1>Testando ansible com terraform</h1>
-  - name: criando servidor web
-    shell: "nohup busybox httpd -f -d 8080 &"
+
+  - name: Install nvm
+    shell: >
+      curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.7.0/install.sh | bash
+    args:
+      creates: "{{ ansible_env.HOME }}/.nvm/nvm.sh"
+
+  - name: Install node and set version
+    shell: >
+      /bin/bash -c "source {{ ansible_env.HOME }}/.nvm/nvm.sh && nvm install 16.14.0 && nvm alias default 16.14.0"
+      creates=/home/{{ ansible_user_id }}/.nvm/alias
+
+  - name: Criando um repo react
+    shell: /bin/bash -c "source {{ ansible_env.HOME }}/.nvm/nvm.sh && yes | npx create-react-app app-teste"
+  
